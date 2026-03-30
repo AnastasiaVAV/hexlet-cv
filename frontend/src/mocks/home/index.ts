@@ -1,8 +1,9 @@
-import { http, delay } from 'msw'
+import type { MswCtx } from '@mocks/msw/createCtx'
+import { defineGet } from '@mocks/msw/define'
 import type { IArticle } from '@widgets/articles'
-import { inertiaJson } from '@mocks/inertia'
 import type { PerformanceCardDto } from '@widgets/performance-review'
 import type { TrainingCardDto } from '@widgets/training-programs'
+import type { OurTeamCardDto } from '@widgets/our-team'
 
 const performanceReview: PerformanceCardDto[] = [
   {
@@ -46,24 +47,56 @@ const articles: IArticle[] = [
     title: 'Как пройти собеседование: частые ошибки и вопросы' },
 ]
 
+const ourTeam: OurTeamCardDto[] = [
+  {
+    id: 1,
+    name: 'Максим',
+    role: 'Основатель сервиса',
+    src: '',
+  },
+  {
+    id: 2,
+    name: 'Альберт',
+    role: 'Администратор',
+    src: '',
+  },
+  {
+    id: 3,
+    name: 'Таня',
+    role: 'HR-менеджер',
+    src: '',
+  },
+  {
+    id: 4,
+    name: 'Слава',
+    role: 'Карьерный консультант',
+    src: '',
+  },
+  {
+    id: 5,
+    name: 'Лера',
+    role: 'Карьерный консультант',
+    src: '',
+  },
+]
+
+const baseProps = (ctx: MswCtx) => ({
+  trainingPrograms,
+  performanceReview,
+  articles,
+  ourTeam,
+  errors: {},
+  flash: {},
+  auth: { user: ctx.user },
+})
+
 export const handlers = [
-  http.get(/\/(\?.*)?$/, async ({ request }) => {
-    console.log('MSW handler hit:', request.method, request.url)
-
-    await delay()
-
-    const page = {
-      component: 'Home',
-      props: {
-        trainingPrograms,
-        performanceReview,
-        articles,
-        errors: {},
-      },
-      url: '/',
-      version: 'msw-dev',
-    }
-
-    return inertiaJson(page)
-  }),
+  defineGet(/\/(\?.*)?$/, ctx =>
+    ctx.inertiaPage(
+      'Home',
+      baseProps(ctx),
+      200,
+      `/${ctx.locale}/`
+    )
+  ),
 ]
