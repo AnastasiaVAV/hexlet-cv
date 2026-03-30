@@ -255,6 +255,11 @@ export default {
           completedProgram: 'Сертификат',
         },
       },
+      studyPrograms: {
+        title: 'Программы обучения',
+        noPrograms: 'Пока нет активных программ',
+        incorrectData: 'Произошла ошибка при загрузке программ',
+      },
       notifications: {
         title: 'Уведомления',
         today: 'сегодня',

@@ -253,6 +253,11 @@ export default {
           completedProgram: 'Сertificate',
         },
       },
+      studyPrograms: {
+        title: 'Study programs',
+        noPrograms: 'You have no any active study programs yet',
+        incorrectData: 'Study programs loading error',
+      },
       notifications: {
         title: 'Notifications',
         today: 'today',

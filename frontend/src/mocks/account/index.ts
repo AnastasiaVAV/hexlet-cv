@@ -1,9 +1,10 @@
 import type { TMenuItem } from '@shared/types/inertiaSharedData'
 import { purchaseHandlers } from '@mocks/account/purchase'
 import { progressHandlers, lessonsHandlers } from '@mocks/account/progress'
-import { notificationsHandlers } from '@mocks/account/notifications'
+import { notificationsHandlers } from '@mocks/account/notifications/index'
 import { defineGet } from '@mocks/msw/define'
 import type { MswCtx } from '@mocks/msw/createCtx'
+import { programsHandlers } from '@mocks/account/programs/index'
 
 export const menu: TMenuItem[] = [
   { label: 'Мое обучение', link: '/account/my-progress' },
@@ -12,7 +13,7 @@ export const menu: TMenuItem[] = [
   { label: 'База знаний' },
   { label: 'Интервью' },
   { label: 'Грейдирование' },
-  { label: 'Программы обучения' },
+  { label: 'Программы обучения', link: '/account/programs' },
   { label: 'Резюме' },
   { label: 'Сопроводительное' },
   { label: 'Автоотклики' },
@@ -67,5 +68,6 @@ export const handlers = [
   ...purchaseHandlers,
   ...progressHandlers,
   ...lessonsHandlers,
+  ...programsHandlers,
   ...notificationsHandlers,
 ]

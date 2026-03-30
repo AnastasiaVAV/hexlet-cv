@@ -1,5 +1,5 @@
 import { defineGet } from '@mocks/msw/define'
-import { menu, activityCards } from '../index'
+import { menu, activityCards } from '@mocks/account/index'
 
 const lessons = [
   {
